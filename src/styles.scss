@@ -1,0 +1,18 @@
+@import 'bootstrap/dist/css/bootstrap.css';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+@import 'material-icons/iconfont/material-icons.css';
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: #fcfdff;
+  color: #333333;
+}
+
+body.menu-open {
+  overflow: hidden;
+}

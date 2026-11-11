@@ -1,0 +1,117 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.right-sidebar {
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+  background: #ffffff;
+  border-left: 1px solid #e5eef7;
+  padding: 20px 14px;
+  position: sticky;
+  top: 0;
+}
+
+.notificaciones {
+  background: #FFE49A;
+}
+
+.notification {
+  background-color: #F7E9D7;
+  border-radius: 100%;
+}
+
+.notification .mat-icon {
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+  line-height: 22px;
+}
+
+.header-notificaciones {
+  color: #FFA400;
+}
+
+.logo_nuevo {
+  width: 25%;
+}
+
+.card_notify {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.card_notification {
+  width: 24px;
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+
+  .mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    color: #1458d9;
+  }
+}
+
+.notification_main a {
+  color: #1458d9;
+  text-decoration: underline;
+}
+
+.notification_main a:hover {
+  opacity: 0.85;
+}
+
+.decoration-section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #f8fafc;
+  padding: 6px 0;
+
+  .decoration-image {
+    max-width: 100%;
+    max-height: 90%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+
+  @media (max-height: 800px) {
+    .decoration-image {
+      max-height: 350px;
+    }
+  }
+}
+
+.promo-logo {
+  width: 32px;
+  height: 32px;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+}
+
+.promo-legal {
+  font-size: 9px;
+  line-height: 1.4;
+}

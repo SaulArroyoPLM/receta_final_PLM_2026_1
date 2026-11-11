@@ -1,0 +1,14 @@
+<div class="search-card">
+    <div class="search-field">
+        <input type="text" [(ngModel)]="query" placeholder="Nombre del medicamento, sustancia, CIE-11"
+            autocomplete="off" (keyup.enter)="onBuscar()" />
+        <button type="button" class="btn-search" aria-label="Buscar" (click)="onBuscar()">
+            <mat-icon>search</mat-icon>
+        </button>
+    </div>
+
+    <button type="button" class="btn-modo" (click)="modo.emit()">
+        <span>Modo</span>
+        <img src="assets/images/ia-logo.svg" alt="IA" class="modo-logo" />
+    </button>
+</div>

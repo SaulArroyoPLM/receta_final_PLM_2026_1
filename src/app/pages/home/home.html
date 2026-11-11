@@ -1,0 +1,28 @@
+<div class="d-flex flex-column flex-xl-row flex-grow-1 min-vh-100">
+  <div class="app-layout flex-grow-1 overflow-auto">
+    <app-welcome-header />
+
+    <div class="mt-3">
+      <app-search-bar />
+    </div>
+
+    <div class="mt-3">
+      <app-patients-table />
+    </div>
+
+    <div class="row g-4 mt-3">
+      <div class="col-12 col-xl-6 mt-2">
+        <app-favorite-recipes />
+      </div>
+      <div class="col-12 col-xl-6 mt-2">
+        <app-appointment-calendar />
+      </div>
+    </div>
+
+    <app-dashboard-footer />
+  </div>
+
+  <aside class="right-sidebar-wrapper">
+    <app-right-sidebar />
+  </aside>
+</div>
