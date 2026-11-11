@@ -1,0 +1,36 @@
+<aside class="right-sidebar p-3 d-flex flex-column gap-3">
+  <a routerLink="/receta" class="btn btn-primary btn-lg rounded-pill fw-bold">
+    <img src="assets/icons/nueva_receta_2.svg" alt="Nueva receta" class="px-3 logo_nuevo">
+    <span>Nueva receta</span>
+  </a>
+
+  @if (avisos().length) {
+  <section class="notificaciones rounded-3 overflow-hidden">
+    <header class=" header-notificaciones d-flex align-items-center justify-content-between px-3 py-2 fw-bold">
+      <div class="notification"><mat-icon>notifications</mat-icon></div><span>Nuevas notificaciones</span>
+      <span class="badge rounded-pill text-bg-danger">{{ avisos().length }}</span>
+    </header>
+    <div class="p-2 d-flex flex-column gap-2">
+      @for (a of avisos(); track a.texto) {
+      <div class="card_notify bg-white rounded-2 p-2 small">
+        <div class="card_notification">
+          <mat-icon>{{ a.tipo === 'seguridad' ? 'security' : 'badge' }}</mat-icon>
+        </div>
+        <div class="notification_main">
+          <p class="mb-1">
+            {{ a.texto }}
+          </p>
+          @if (a.linkRuta) {
+          <a [routerLink]="a.linkRuta">{{ a.linkTexto }}</a>
+          }
+        </div>
+      </div>
+      }
+    </div>
+  </section>
+  }
+
+  <div class="decoration-section">
+    <img src="assets/images/mex_20260717_medplmcom_demus_adium.gif" alt="banner" class="decoration-image" />
+  </div>
+</aside>

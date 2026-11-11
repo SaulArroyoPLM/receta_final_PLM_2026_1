@@ -1,0 +1,199 @@
+$plm-blue: #1458d9;
+$border-color: #e5eaf2;
+
+:host {
+  display: block;
+}
+
+.fav-accordion {
+  display: block;
+
+  .fav-panel {
+    background: #ffffff !important;
+    border-radius: 16px !important;
+    border: 1px solid #edf2f7 !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02) !important;
+    overflow: hidden;
+    transition: all 0.25s ease;
+
+    // Solo cuando está ABIERTO empareja la altura con el calendario:
+    &.mat-expanded {
+      min-height: 370px;
+      display: flex;
+      flex-direction: column;
+
+      ::ng-deep .mat-expansion-panel-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      ::ng-deep .mat-expansion-panel-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 0 1.5rem 1.25rem !important;
+      }
+    }
+
+    // Cuando se CIERRA se encoge solo a su encabezado:
+    &:not(.mat-expanded) {
+      height: auto !important;
+      min-height: unset !important;
+    }
+  }
+
+  .fav-panel-header {
+    padding: 0 1.5rem !important;
+    height: 64px !important;
+
+    ::ng-deep .mat-content {
+      align-items: center;
+      justify-content: space-between;
+      margin-right: 12px;
+    }
+
+    // Indicador con círculo azul claro
+    ::ng-deep .mat-expansion-indicator {
+      color: #1458D9 !important;
+      border-radius: 50% !important;
+      width: 32px;
+      height: 32px;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      transition: all 0.3s ease !important;
+      background: rgba(20, 88, 217, 0.1) !important;
+
+      &::after {
+        color: #1458D9 !important;
+        border-color: #1458D9 !important;
+        padding: 3px;
+        margin-bottom: 2px;
+      }
+
+      svg {
+        fill: #1458D9 !important;
+      }
+    }
+
+    &:hover {
+      ::ng-deep .mat-expansion-indicator {
+        background: rgba(20, 88, 217, 0.18) !important;
+      }
+    }
+  }
+}
+
+.fav-title {
+  color: $plm-blue;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.btn-ver-todas {
+  border: 1.5px solid $plm-blue;
+  color: $plm-blue;
+  background: transparent;
+  border-radius: 20px;
+  padding: 4px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+
+  &:hover {
+    background: $plm-blue;
+    color: #fff;
+  }
+}
+
+.fav-divider {
+  border-top: 1px solid $border-color;
+  margin-bottom: 0.5rem;
+}
+
+.fav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.fav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid $border-color;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  .fav-icon {
+    color: #a3a3a3;
+    font-size: 22px;
+    width: 22px;
+    height: 22px;
+  }
+
+  .fav-name {
+    flex: 1;
+    font-size: 14px;
+    color: #4a5568;
+  }
+}
+
+.fav-empty {
+  padding: 1rem 0;
+  text-align: center;
+  font-size: 13px;
+  color: #718096;
+}
+
+.btn-action {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s ease;
+
+  mat-icon {
+    font-size: 17px;
+    width: 17px;
+    height: 17px;
+    line-height: 17px;
+  }
+
+  &.btn-edit {
+    background-color: #ebf4fd;
+    color: $plm-blue;
+
+    &:hover {
+      background-color: #dbeafe;
+      transform: scale(1.08);
+    }
+  }
+
+  &.btn-delete {
+    background-color: #ffffff;
+    border: 1px solid #ffd2d2;
+    color: #e53935;
+
+    &:hover {
+      background-color: #ffebee;
+      transform: scale(1.08);
+    }
+  }
+}

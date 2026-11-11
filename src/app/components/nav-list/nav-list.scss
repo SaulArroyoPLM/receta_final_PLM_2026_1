@@ -1,0 +1,72 @@
+:host {
+  display: block;
+}
+
+.nav-link {
+  color: #4a5568;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 12px;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+  text-decoration: none;
+
+  &:hover {
+    background-color: #f4f8fd;
+    color: #1458d9;
+
+    .nav-icon {
+      filter: brightness(0) saturate(100%) invert(27%) sepia(87%) saturate(2245%) hue-rotate(209deg) brightness(91%) contrast(92%);
+    }
+  }
+
+  &.active {
+    background-color: #ebf4fd;
+    color: #1458d9;
+    font-weight: 600;
+  }
+}
+
+.nav-icon-wrapper {
+  width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-right: 10px;
+}
+
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  opacity: 0.75;
+}
+
+/* Badge Verde con Check */
+.badge-check {
+  width: 18px;
+  height: 18px;
+  background-color: #38b000;
+  color: #ffffff;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+/* Badge Rojo con Número */
+.badge-count {
+  min-width: 18px;
+  height: 18px;
+  background-color: #e60000;
+  color: #ffffff;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 0 4px;
+}

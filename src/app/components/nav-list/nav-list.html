@@ -1,0 +1,30 @@
+<ul class="nav flex-column gap-1">
+  @for (item of items(); track item.route) {
+    <li class="nav-item">
+      <a
+        class="nav-link d-flex align-items-center"
+        [routerLink]="item.route"
+        routerLinkActive="active"
+        (click)="navegar.emit()"
+      >
+        <span class="nav-icon-wrapper">
+          <img [src]="item.icon" alt="" class="nav-icon" />
+        </span>
+
+        <span class="nav-label flex-grow-1">{{ item.label }}</span>
+
+        @if (item.badgeType === 'check') {
+          <span class="badge-check">
+            <i class="bi bi-check-lg"></i>
+          </span>
+        }
+
+        @if (item.badgeType === 'count' && item.badge) {
+          <span class="badge-count">
+            {{ item.badge }}
+          </span>
+        }
+      </a>
+    </li>
+  }
+</ul>

@@ -1,0 +1,154 @@
+<div class="patient-card">
+  <!-- Encabezado con título azul y botón 'Ver todos' redondeado -->
+  <div class="patient-header">
+    <h3 class="patient-title">Últimos pacientes</h3>
+    <button type="button" class="btn-ver-todos">Ver todos</button>
+  </div>
+
+  <!-- Vista Desktop / Tablet -->
+  <div class="desktop-view" [class.hidden]="isMobile">
+    <table mat-table [dataSource]="pacientes" class="patient-table" multiTemplateDataRows>
+
+      <!-- Nombre(s) -->
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef>Nombre(s)</th>
+        <td mat-cell *matCellDef="let paciente">{{ paciente.nombre }}</td>
+      </ng-container>
+
+      <!-- Primer apellido -->
+      <ng-container matColumnDef="primerApellido">
+        <th mat-header-cell *matHeaderCellDef>Primer apellido</th>
+        <td mat-cell *matCellDef="let paciente">{{ paciente.primerApellido }}</td>
+      </ng-container>
+
+      <!-- Segundo apellido -->
+      <ng-container matColumnDef="segundoApellido">
+        <th mat-header-cell *matHeaderCellDef>Segundo apellido</th>
+        <td mat-cell *matCellDef="let paciente">{{ paciente.segundoApellido }}</td>
+      </ng-container>
+
+      <!-- Sexo -->
+      <ng-container matColumnDef="sexo">
+        <th mat-header-cell *matHeaderCellDef>Sexo</th>
+        <td mat-cell *matCellDef="let paciente">{{ paciente.sexo }}</td>
+      </ng-container>
+
+      <!-- Edad -->
+      <ng-container matColumnDef="edad">
+        <th mat-header-cell *matHeaderCellDef>Edad</th>
+        <td mat-cell *matCellDef="let paciente">{{ paciente.edad }} años</td>
+      </ng-container>
+
+      <!-- Acciones (con flechita en el encabezado) -->
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef>
+          <div class="acciones-header">
+            <span>Acciones</span>
+          </div>
+        </th>
+        <td mat-cell *matCellDef="let paciente" class="acciones-cell">
+          <!-- Botón Editar (Lápiz azul) -->
+          <button type="button" class="btn-action btn-edit" (click)="onEditar(paciente, $event)"
+            title="Editar paciente / receta">
+            <mat-icon>edit</mat-icon>
+          </button>
+
+          <!-- Botón Eliminar (Bote de basura rojo) -->
+          <button type="button" class="btn-action btn-delete" (click)="onEliminar(paciente, $event)"
+            title="Eliminar paciente">
+            <mat-icon>delete_outline</mat-icon>
+          </button>
+
+          <!-- Flecha de toggle / expandir detalle -->
+          <button type="button" class="btn-action btn-toggle" [class.expanded]="isExpanded(paciente)"
+            (click)="toggleRow(paciente); $event.stopPropagation()" title="Ver diagnóstico">
+            <mat-icon>{{ isExpanded(paciente) ? 'expand_less' : 'expand_more' }}</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Fila de detalle expandible con diagnóstico -->
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let paciente" [attr.colspan]="displayedColumns.length" class="expanded-detail-cell">
+          @if (isExpanded(paciente) && paciente.diagnostico) {
+          <div class="diagnosis-detail">
+            <div class="diagnosis-header">
+              <h5 class="diagnosis-header-title">{{ paciente.diagnostico.header }}</h5>
+            </div>
+            <div class="diagnosis-info">
+              <span class="date-badge">{{ paciente.diagnostico.fecha }}</span>
+              <span class="diagnosis-text">
+                <strong>Diagnóstico:</strong> {{ paciente.diagnostico.titulo }}
+              </span>
+              <div class="diagnosis-actions ms-auto">
+                <button type="button" class="btn btn-outline-primary btn-sm rounded-pill px-3"
+                  (click)="onVerReceta(paciente, $event)">
+                  <mat-icon class="align-middle me-1"
+                    style="font-size: 16px; width: 16px; height: 16px;">edit</mat-icon>
+                  Ver Receta
+                </button>
+                <button type="button" class="btn btn-outline-primary btn-sm rounded-pill px-3"
+                  (click)="onResurtir(paciente, $event)">
+                  <mat-icon class="align-middle me-1"
+                    style="font-size: 16px; width: 16px; height: 16px;">refresh</mat-icon>
+                  Resurtir receta
+                </button>
+              </div>
+            </div>
+          </div>
+          }
+        </td>
+      </ng-container>
+
+      <!-- Filas principales -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let paciente; columns: displayedColumns" class="patient-row"
+        [class.expanded-row]="isExpanded(paciente)" (click)="toggleRow(paciente)"></tr>
+      <tr mat-row *matRowDef="let paciente; columns: ['expandedDetail']" class="detail-row"
+        [class.visible]="isExpanded(paciente)"></tr>
+    </table>
+  </div>
+
+  <!-- Vista Móvil - Expansion Panels -->
+  <div class="mobile-view" [class.hidden]="!isMobile">
+    <mat-accordion class="patient-accordion" multi="false">
+      @for (paciente of pacientes; track paciente.id) {
+      <mat-expansion-panel class="patient-panel">
+        <mat-expansion-panel-header class="patient-panel-header">
+          <mat-panel-title class="panel-title">
+            <div class="d-flex align-items-center justify-content-between w-100">
+              <strong class="text-dark">{{ getNombreCompleto(paciente) }}</strong>
+              <span class="badge bg-light text-primary border">{{ paciente.edad }} años</span>
+            </div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="panel-content">
+          <div class="detail-row-mobile">
+            <span class="text-muted">Sexo:</span>
+            <span>{{ getSexoLabel(paciente.sexo) }}</span>
+          </div>
+
+          @if (paciente.diagnostico) {
+          <div class="mobile-diag-card mt-2 p-2 rounded bg-light border">
+            <small class="text-primary fw-bold d-block">{{ paciente.diagnostico.header }} ({{ paciente.diagnostico.fecha
+              }})</small>
+            <span class="small">{{ paciente.diagnostico.titulo }}</span>
+          </div>
+          }
+
+          <div class="d-flex gap-2 mt-3">
+            <button type="button" class="btn btn-sm btn-outline-primary flex-grow-1"
+              (click)="onEditar(paciente, $event)">
+              Editar
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-danger" (click)="onEliminar(paciente, $event)">
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </mat-expansion-panel>
+      }
+    </mat-accordion>
+  </div>
+</div>
