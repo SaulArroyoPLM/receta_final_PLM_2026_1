@@ -1,59 +1,67 @@
 <mat-accordion class="cal-accordion">
-    <mat-expansion-panel class="cal-panel" [expanded]="panelOpenState()" (opened)="panelOpenState.set(true)"
-        (closed)="panelOpenState.set(false)">
-        <mat-expansion-panel-header class="cal-panel-header">
-            <mat-panel-title class="cal-title">
-                Agendar cita
-            </mat-panel-title>
+  <mat-expansion-panel
+    class="cal-panel"
+    [expanded]="panelOpenState()"
+    (opened)="panelOpenState.set(true)"
+    (closed)="panelOpenState.set(false)"
+  >
+    <mat-expansion-panel-header class="cal-panel-header">
+      <mat-panel-title class="cal-title"> Agendar cita </mat-panel-title>
 
-            <!-- Botón Ver todas con stopPropagation para no activar el toggle del acordeón -->
-            <button type="button" class="btn-ver-todas" (click)="$event.stopPropagation(); onVerTodas()">
-                Ver todas
-            </button>
-        </mat-expansion-panel-header>
+      <!-- Botón Ver todas con stopPropagation para no activar el toggle del acordeón -->
+      <button type="button" class="btn-ver-todas" (click)="$event.stopPropagation()">
+        Ver todas
+      </button>
+    </mat-expansion-panel-header>
 
-        <div class="cal-container">
-            <!-- Header del calendario celeste con mes y año -->
-            <div class="cal-month-bar">
-                <div class="month-selector">
-                    <span>{{ mesActual }}</span>
-                    <i class="bi bi-chevron-down"></i>
-                </div>
-                <div class="year-selector">
-                    <span>{{ anioActual }}</span>
-                    <i class="bi bi-chevron-right"></i>
-                </div>
-            </div>
-
-            <!-- Días de la semana -->
-            <div class="cal-weekdays">
-                <span>Lun</span>
-                <span>Mar</span>
-                <span>Mié</span>
-                <span>Jue</span>
-                <span>Vie</span>
-                <span>Sáb</span>
-                <span>Dom</span>
-            </div>
-
-            <!-- Grilla de días -->
-            <div class="cal-days-grid">
-                @for (d of dias; track $index) {
-                <button type="button" class="cal-day-cell" [class.muted]="d.esOtroMes" [class.bold]="d.esNegrita"
-                    [class.selected]="d.numero === diaSeleccionado && !d.esOtroMes" (click)="seleccionarDia(d)">
-                    {{ d.numero }}
-                </button>
-                }
-            </div>
-
-            <!-- Separador inferior -->
-            <div class="cal-divider"></div>
-
-            <!-- Selector de hora demostrativo -->
-            <div class="cal-time-display">
-                <span class="time-digit">{{ hora }}</span>
-                <span class="time-digit">{{ minutos }}</span>
-            </div>
+    <div class="cal-container">
+      <!-- Header del calendario celeste con mes y año -->
+      <div class="cal-month-bar">
+        <div class="month-selector">
+          <span>{{ mesActual }}</span>
+          <i class="bi bi-chevron-down"></i>
         </div>
-    </mat-expansion-panel>
+        <div class="year-selector">
+          <span>{{ anioActual }}</span>
+          <i class="bi bi-chevron-right"></i>
+        </div>
+      </div>
+
+      <!-- Días de la semana -->
+      <div class="cal-weekdays">
+        <span>Lun</span>
+        <span>Mar</span>
+        <span>Mié</span>
+        <span>Jue</span>
+        <span>Vie</span>
+        <span>Sáb</span>
+        <span>Dom</span>
+      </div>
+
+      <!-- Grilla de días -->
+      <div class="cal-days-grid">
+        @for (d of dias; track $index) {
+          <button
+            type="button"
+            class="cal-day-cell"
+            [class.muted]="d.esOtroMes"
+            [class.bold]="d.esNegrita"
+            [class.selected]="d.numero === diaSeleccionado && !d.esOtroMes"
+            (click)="seleccionarDia(d)"
+          >
+            {{ d.numero }}
+          </button>
+        }
+      </div>
+
+      <!-- Separador inferior -->
+      <div class="cal-divider"></div>
+
+      <!-- Selector de hora demostrativo -->
+      <div class="cal-time-display">
+        <span class="time-digit">{{ hora }}</span>
+        <span class="time-digit">{{ minutos }}</span>
+      </div>
+    </div>
+  </mat-expansion-panel>
 </mat-accordion>

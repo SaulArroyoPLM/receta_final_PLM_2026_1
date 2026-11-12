@@ -16,7 +16,6 @@ $border-color: #e5eaf2;
     overflow: hidden;
     transition: all 0.25s ease;
 
-    // Solo cuando está ABIERTO empareja la altura con el calendario:
     &.mat-expanded {
       min-height: 370px;
       display: flex;
@@ -36,7 +35,6 @@ $border-color: #e5eaf2;
       }
     }
 
-    // Cuando se CIERRA se encoge solo a su encabezado:
     &:not(.mat-expanded) {
       height: auto !important;
       min-height: unset !important;
@@ -53,9 +51,8 @@ $border-color: #e5eaf2;
       margin-right: 12px;
     }
 
-    // Indicador con círculo azul claro
     ::ng-deep .mat-expansion-indicator {
-      color: #1458D9 !important;
+      color: #1458d9 !important;
       border-radius: 50% !important;
       width: 32px;
       height: 32px;
@@ -66,14 +63,14 @@ $border-color: #e5eaf2;
       background: rgba(20, 88, 217, 0.1) !important;
 
       &::after {
-        color: #1458D9 !important;
-        border-color: #1458D9 !important;
+        color: #1458d9 !important;
+        border-color: #1458d9 !important;
         padding: 3px;
         margin-bottom: 2px;
       }
 
       svg {
-        fill: #1458D9 !important;
+        fill: #1458d9 !important;
       }
     }
 

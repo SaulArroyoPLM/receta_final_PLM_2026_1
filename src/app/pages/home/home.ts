@@ -21,4 +21,4 @@ import { DashboardFooter } from '../../components/dashboard/dashboard-footer/das
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
-export class Home { }
+export class Home {}

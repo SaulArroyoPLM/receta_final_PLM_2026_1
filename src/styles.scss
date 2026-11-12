@@ -16,3 +16,8 @@ body {
 body.menu-open {
   overflow: hidden;
 }
+
+.registro-dialog-container {
+  width: clamp(320px, 85vw, 1090px);
+  height: clamp(600px, 90vh, 820px);
+}

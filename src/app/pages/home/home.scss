@@ -1,18 +1,15 @@
 .app-layout {
-  background: linear-gradient(135deg, #F1F8FF 0%, #E3F2FD 100%);
-  padding: 1rem; // Móvil
+  background: linear-gradient(135deg, #f1f8ff 0%, #e3f2fd 100%);
+  padding: 1rem;
 
-  // Tablets y laptops pequeñas (992px a 1199px)
   @media (min-width: 992px) {
     padding: 1.25rem 1.5rem;
   }
 
-  // Laptops estándar (1200px a 1599px)
   @media (min-width: 1200px) {
     padding: 1.5rem 2rem;
   }
 
-  // Monitores grandes / Desktop ancho (1600px en adelante)
   @media (min-width: 1600px) {
     padding: 2rem 4rem;
   }

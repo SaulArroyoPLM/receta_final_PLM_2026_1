@@ -1,7 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MatIconModule } from '@angular/material/icon';
 
 export interface DiaCalendario {
   numero: number;
@@ -11,8 +9,7 @@ export interface DiaCalendario {
 
 @Component({
   selector: 'app-appointment-calendar',
-  standalone: true,
-  imports: [CommonModule, MatIconModule, MatExpansionModule],
+  imports: [MatExpansionModule],
   templateUrl: './appointment-calendar.html',
   styleUrl: './appointment-calendar.scss',
 })
@@ -26,7 +23,6 @@ export class AppointmentCalendar {
   minutos = '00';
 
   readonly dias: DiaCalendario[] = [
-    // Semana 1 (días previos atenuados)
     { numero: 26, esOtroMes: true },
     { numero: 27, esOtroMes: true },
     { numero: 28, esOtroMes: true },
@@ -34,7 +30,7 @@ export class AppointmentCalendar {
     { numero: 30, esOtroMes: true },
     { numero: 31, esOtroMes: true },
     { numero: 1 },
-    // Semana 2
+
     { numero: 2 },
     { numero: 3 },
     { numero: 4 },
@@ -42,7 +38,7 @@ export class AppointmentCalendar {
     { numero: 6 },
     { numero: 7 },
     { numero: 8 },
-    // Semana 3
+
     { numero: 9 },
     { numero: 10 },
     { numero: 11 },
@@ -50,7 +46,7 @@ export class AppointmentCalendar {
     { numero: 13 },
     { numero: 14 },
     { numero: 15 },
-    // Semana 4
+
     { numero: 16 },
     { numero: 17 },
     { numero: 18 },
@@ -58,7 +54,7 @@ export class AppointmentCalendar {
     { numero: 20 },
     { numero: 21 },
     { numero: 22 },
-    // Semana 5 (días destacados en negrita)
+
     { numero: 23, esNegrita: true },
     { numero: 24, esNegrita: true },
     { numero: 25, esNegrita: true },
@@ -66,7 +62,7 @@ export class AppointmentCalendar {
     { numero: 27, esNegrita: true },
     { numero: 28, esNegrita: true },
     { numero: 29, esNegrita: true },
-    // Semana 6
+
     { numero: 30, esNegrita: true },
     { numero: 1, esOtroMes: true },
     { numero: 2, esOtroMes: true },
@@ -80,9 +76,5 @@ export class AppointmentCalendar {
     if (!d.esOtroMes) {
       this.diaSeleccionado = d.numero;
     }
-  }
-
-  onVerTodas() {
-    console.log('Ver todas las citas');
   }
 }
