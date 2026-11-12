@@ -16,7 +16,8 @@
     color: #1458d9;
 
     .nav-icon {
-      filter: brightness(0) saturate(100%) invert(27%) sepia(87%) saturate(2245%) hue-rotate(209deg) brightness(91%) contrast(92%);
+      filter: brightness(0) saturate(100%) invert(27%) sepia(87%) saturate(2245%) hue-rotate(209deg)
+        brightness(91%) contrast(92%);
     }
   }
 
@@ -42,7 +43,6 @@
   opacity: 0.75;
 }
 
-/* Badge Verde con Check */
 .badge-check {
   width: 18px;
   height: 18px;
@@ -56,7 +56,6 @@
   font-weight: bold;
 }
 
-/* Badge Rojo con Número */
 .badge-count {
   min-width: 18px;
   height: 18px;

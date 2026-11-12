@@ -1,7 +1,8 @@
-import { Component, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon';
+import { Component, inject, signal } from '@angular/core';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
+import { ConfirmDialog } from '../../shared/confirm-dialog/confirm-dialog';
 
 export interface RecetaFavorita {
   id: number;
@@ -10,12 +11,13 @@ export interface RecetaFavorita {
 
 @Component({
   selector: 'app-favorite-recipes',
+  imports: [MatDialogModule, MatExpansionModule, MatIconModule],
   templateUrl: './favorite-recipes.html',
   styleUrl: './favorite-recipes.scss',
-  standalone: true,
-  imports: [CommonModule, MatIconModule, MatExpansionModule],
 })
 export class FavoriteRecipes {
+  private readonly dialog = inject(MatDialog);
+
   readonly panelOpenState = signal(true);
 
   recetas: RecetaFavorita[] = [
@@ -25,17 +27,20 @@ export class FavoriteRecipes {
     { id: 4, nombre: 'Diarrea' },
   ];
 
-  onUsar(r: RecetaFavorita) {
-    console.log('Usar receta:', r);
-  }
-
   onEliminar(r: RecetaFavorita) {
-    if (confirm(`¿Eliminar la receta "${r.nombre}"?`)) {
-      this.recetas = this.recetas.filter((x) => x.id !== r.id);
-    }
-  }
-
-  onVerTodas() {
-    console.log('Ver todas las recetas');
+    this.dialog
+      .open(ConfirmDialog, {
+        data: {
+          title: 'Eliminar receta',
+          message: `¿Eliminar la receta "${r.nombre}"?`,
+          confirmLabel: 'Eliminar',
+        },
+      })
+      .afterClosed()
+      .subscribe((confirmed) => {
+        if (confirmed) {
+          this.recetas = this.recetas.filter((x) => x.id !== r.id);
+        }
+      });
   }
 }

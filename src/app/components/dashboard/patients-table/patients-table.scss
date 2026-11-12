@@ -42,7 +42,6 @@ $text-muted: #666666;
   }
 }
 
-/* Tabla Desktop */
 .patient-table {
   width: 100%;
   background: transparent;
@@ -70,7 +69,6 @@ $text-muted: #666666;
         width: 18px;
         height: 18px;
         color: #718096;
-
       }
     }
   }
@@ -87,7 +85,6 @@ $text-muted: #666666;
       font-size: 13.5px;
       color: #4a5568;
       white-space: nowrap;
-      /* Evita que "37 años" o los nombres se quiebren en 2 líneas */
 
       &:first-child {
         border-left: 1px solid $border-color;
@@ -131,7 +128,6 @@ $text-muted: #666666;
   }
 }
 
-/* Celda de Acciones */
 .acciones-cell {
   white-space: nowrap;
 }
@@ -193,7 +189,6 @@ $text-muted: #666666;
   }
 }
 
-/* Detalle expandible */
 .diagnosis-detail {
   background: #f0f6ff;
   border: 1px solid #d0e4ff;
@@ -248,7 +243,6 @@ $text-muted: #666666;
   }
 }
 
-/* Vista Móvil */
 .hidden {
   display: none !important;
 }

@@ -5,7 +5,6 @@ import { NavList } from '../nav-list/nav-list';
 
 @Component({
   selector: 'app-slider-menu',
-  standalone: true,
   imports: [RouterLink, RouterLinkActive, NavList],
   templateUrl: './slider-menu.html',
   styleUrl: './slider-menu.scss',
@@ -24,15 +23,41 @@ export class SliderMenu {
   readonly consulta: NavItem[] = [
     { label: 'Nueva receta', icon: 'assets/icons/nueva_receta.svg', route: '/receta' },
     { label: 'Pacientes', icon: 'assets/icons/pacientes.svg', route: '/pacientes' },
-    { label: 'Consultar medicamentos', icon: 'assets/icons/consultar_medica.svg', route: '/consultar-medicamentos' },
+    {
+      label: 'Consultar medicamentos',
+      icon: 'assets/icons/consultar_medica.svg',
+      route: '/consultar-medicamentos',
+    },
     { label: 'Agenda', icon: 'assets/icons/agenda.svg', route: '/agenda' },
   ];
 
   readonly perfil: NavItem[] = [
-    { label: 'Datos personales', icon: 'assets/icons/datos_personales.svg', route: '/datos-personales', badgeType: 'check' },
-    { label: 'Datos profesionales', icon: 'assets/icons/datos_profecionales.svg', route: '/datos-profesionales', badgeType: 'check' },
-    { label: 'Consultorios', icon: 'assets/icons/consultorio.svg', route: '/consultorios', badge: 1, badgeType: 'count' },
-    { label: 'Identidad y Firma', icon: 'assets/icons/firma.svg', route: '/firma', badge: 3, badgeType: 'count' },
+    {
+      label: 'Datos personales',
+      icon: 'assets/icons/datos_personales.svg',
+      route: '/datos-personales',
+      badgeType: 'check',
+    },
+    {
+      label: 'Datos profesionales',
+      icon: 'assets/icons/datos_profecionales.svg',
+      route: '/datos-profesionales',
+      badgeType: 'check',
+    },
+    {
+      label: 'Consultorios',
+      icon: 'assets/icons/consultorio.svg',
+      route: '/consultorios',
+      badge: 1,
+      badgeType: 'count',
+    },
+    {
+      label: 'Identidad y Firma',
+      icon: 'assets/icons/firma.svg',
+      route: '/firma',
+      badge: 3,
+      badgeType: 'count',
+    },
   ];
 
   constructor() {
@@ -43,7 +68,9 @@ export class SliderMenu {
     });
 
     effect(() => {
-      try { localStorage.setItem('menu-collapsed', String(this.collapsed())); } catch {}
+      try {
+        localStorage.setItem('menu-collapsed', String(this.collapsed()));
+      } catch {}
     });
   }
 
@@ -60,14 +87,14 @@ export class SliderMenu {
   }
 
   private leerCollapsed(): boolean {
-    try { return localStorage.getItem('menu-collapsed') === 'true'; } catch { return false; }
+    try {
+      return localStorage.getItem('menu-collapsed') === 'true';
+    } catch {
+      return false;
+    }
   }
 
   onConsultorio(event: Event) {
     this.consultorio.set((event.target as HTMLSelectElement).value);
-  }
-
-  onLogout() {
-    console.log('Cerrar sesión');
   }
 }

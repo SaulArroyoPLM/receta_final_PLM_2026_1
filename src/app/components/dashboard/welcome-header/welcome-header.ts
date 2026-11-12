@@ -15,7 +15,7 @@ interface UsuarioMock {
   selector: 'app-welcome-header',
   imports: [CommonModule],
   templateUrl: './welcome-header.html',
-  styleUrls: ['./welcome-header.scss'],
+  styleUrl: './welcome-header.scss',
 })
 export class WelcomeHeader {
   @Input() showTitle = true;
@@ -29,13 +29,17 @@ export class WelcomeHeader {
 
   getShortName(): string {
     const nombres = [this.usuario.nombre, this.usuario.segundoNombre]
-      .filter(n => n).join(' ').trim();
+      .filter((n) => n)
+      .join(' ')
+      .trim();
     return nombres || 'Usuario';
   }
 
   getApellidos(): string {
     const apellidos = [this.usuario.primerApellido, this.usuario.segundoApellido]
-      .filter(a => a).join(' ').trim();
+      .filter((a) => a)
+      .join(' ')
+      .trim();
     return apellidos || 'Apellidos';
   }
 

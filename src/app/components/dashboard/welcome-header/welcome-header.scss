@@ -1,26 +1,26 @@
 .welcome-title {
-    color: #1458D9;
-    display: flex;
-    justify-content: center;
-    gap: .5rem;
-    flex-wrap: wrap;
+  color: #1458d9;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .doctor-name {
-    display: flex;
-    gap: .5rem;
+  display: flex;
+  gap: 0.5rem;
 }
 
 @media (max-width: 768px) {
-    .welcome-title {
-        flex-direction: column;
-        align-items: center;
-        padding: .5rem;
-    }
+  .welcome-title {
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem;
+  }
 
-    .doctor-name {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+  .doctor-name {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }

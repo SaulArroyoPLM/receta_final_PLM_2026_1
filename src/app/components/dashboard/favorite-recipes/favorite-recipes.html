@@ -6,16 +6,9 @@
     (closed)="panelOpenState.set(false)"
   >
     <mat-expansion-panel-header class="fav-panel-header">
-      <mat-panel-title class="fav-title">
-        Recetas favoritas
-      </mat-panel-title>
+      <mat-panel-title class="fav-title"> Recetas favoritas </mat-panel-title>
 
-      <!-- Botón Ver todas con stopPropagation para no activar el toggle del acordeón -->
-      <button
-        type="button"
-        class="btn-ver-todas"
-        (click)="$event.stopPropagation(); onVerTodas()"
-      >
+      <button type="button" class="btn-ver-todas" (click)="$event.stopPropagation()">
         Ver todas
       </button>
     </mat-expansion-panel-header>
@@ -28,12 +21,7 @@
           <mat-icon class="fav-icon">note_add</mat-icon>
           <span class="fav-name">{{ r.nombre }}</span>
 
-          <button
-            type="button"
-            class="btn-action btn-edit"
-            title="Usar receta"
-            (click)="onUsar(r)"
-          >
+          <button type="button" class="btn-action btn-edit" title="Usar receta">
             <mat-icon>edit</mat-icon>
           </button>
           <button
@@ -51,3 +39,4 @@
     </ul>
   </mat-expansion-panel>
 </mat-accordion>
+|

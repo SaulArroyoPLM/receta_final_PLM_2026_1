@@ -1,12 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatTableModule } from '@angular/material/table';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatChipsModule } from '@angular/material/chips';
+import { Component, OnInit, inject } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { ConfirmDialog } from '../../shared/confirm-dialog/confirm-dialog';
 
 export interface Paciente {
   id: number;
@@ -24,20 +22,14 @@ export interface Paciente {
 
 @Component({
   selector: 'app-patients-table',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatTableModule,
-    MatButtonModule,
-    MatIconModule,
-    MatMenuModule,
-    MatExpansionModule,
-    MatChipsModule,
-  ],
+  imports: [MatDialogModule, MatExpansionModule, MatIconModule, MatTableModule],
   templateUrl: './patients-table.html',
   styleUrl: './patients-table.scss',
 })
 export class PatientsTable implements OnInit {
+  private readonly breakpointObserver = inject(BreakpointObserver);
+  private readonly dialog = inject(MatDialog);
+
   displayedColumns: string[] = [
     'nombre',
     'primerApellido',
@@ -92,8 +84,6 @@ export class PatientsTable implements OnInit {
     },
   ];
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
-
   ngOnInit() {
     this.breakpointObserver.observe([Breakpoints.Handset]).subscribe((result) => {
       this.isMobile = result.matches;
@@ -120,29 +110,26 @@ export class PatientsTable implements OnInit {
     return this.expandedElement === element;
   }
 
-  onEditar(paciente: Paciente, event: Event) {
-    event.stopPropagation();
-    console.log('Editar paciente:', paciente);
-  }
-
   onEliminar(paciente: Paciente, event: Event) {
     event.stopPropagation();
-    if (confirm(`¿Estás seguro de eliminar a ${this.getNombreCompleto(paciente)}?`)) {
-      const index = this.pacientes.findIndex((p) => p.id === paciente.id);
-      if (index > -1) {
-        this.pacientes.splice(index, 1);
-        this.pacientes = [...this.pacientes];
-      }
-    }
-  }
 
-  onVerReceta(paciente: Paciente, event: Event) {
-    event.stopPropagation();
-    console.log('Ver receta de:', paciente);
-  }
-
-  onResurtir(paciente: Paciente, event: Event) {
-    event.stopPropagation();
-    console.log('Resurtir receta de:', paciente);
+    this.dialog
+      .open(ConfirmDialog, {
+        data: {
+          title: 'Eliminar paciente',
+          message: `¿Estás seguro de eliminar a ${this.getNombreCompleto(paciente)}?`,
+          confirmLabel: 'Eliminar',
+        },
+      })
+      .afterClosed()
+      .subscribe((confirmed) => {
+        if (confirmed) {
+          const index = this.pacientes.findIndex((p) => p.id === paciente.id);
+          if (index > -1) {
+            this.pacientes.splice(index, 1);
+            this.pacientes = [...this.pacientes];
+          }
+        }
+      });
   }
 }
