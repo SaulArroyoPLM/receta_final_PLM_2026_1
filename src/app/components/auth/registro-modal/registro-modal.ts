@@ -116,6 +116,7 @@ export class RegistroDialog implements OnInit, OnDestroy {
   acepta = new FormControl(false, Validators.requiredTrue);
 
   readonly profesiones = [
+    { valor: 'none', etiqueta: 'Seleccionar' },
     { valor: 'general', etiqueta: 'Médico general' },
     { valor: 'especialista', etiqueta: 'Médico especialista' },
   ];
@@ -196,7 +197,7 @@ export class RegistroDialog implements OnInit, OnDestroy {
   private initializeForms(): void {
     this.datosPersonalesForm = this.fb.group({
       correo: ['', [Validators.required, Validators.email]],
-      profesion: ['general', Validators.required],
+      profesion: ['none', Validators.required],
       nombre: ['', [Validators.required, Validators.minLength(2)]],
       cedula: ['', [Validators.required, cedulaValidator]],
       primerApellido: ['', [Validators.required, Validators.minLength(2)]],

@@ -144,7 +144,7 @@
   margin: 0 auto 24px;
   padding: 10px 40px;
   background: #bfe0ff;
-  color: #003fa6;
+  color: #2460D9;
   font-size: 17px;
   font-weight: 700;
   border-radius: 12px;
@@ -284,7 +284,7 @@
 .modal-intro {
   text-align: center;
   font-size: 18px;
-  color: #003fa6;
+  color: #2460D9;
   margin: 0 0 12px;
 }
 
@@ -978,6 +978,41 @@ mat-progress-bar {
   padding: 30px;
   width: 100%;
   max-width: 900px;
+}
+
+
+.aviso {
+  margin: 0 -40px; // las líneas llegan a los bordes del modal
+  padding: 22px 40px;
+  max-height: 52vh; // si no cabe, hace scroll solo el texto
+  overflow-y: auto;
+  border-top: 1px solid #cfe6ff;
+  border-bottom: 1px solid #cfe6ff;
+  text-align: left;
+
+  p {
+    margin: 0 0 16px;
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: #555;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  b {
+    font-weight: 700;
+    color: #444;
+  }
+}
+
+// Pie centrado, sin borde (las líneas ya las pone .aviso)
+.footer-centro {
+  justify-content: center;
+  border-top: none;
+  margin-top: 0;
+  padding: 18px 32px 22px;
 }
 
 /* --ion-color-contrast: var(--ion-color-primary-contrast, #fff) !important;
