@@ -17,6 +17,7 @@ export interface UsuarioRegistro {
   cedula_profesional: string;
   titulo?: string;
   especialidad_medica: string;
+  institucion_especialidad?: string;
   cedula_especialidad?: string;
   institucion: string;
   consultorio: string;
