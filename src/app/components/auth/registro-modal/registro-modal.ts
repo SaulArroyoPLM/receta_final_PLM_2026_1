@@ -208,6 +208,7 @@ export class RegistroDialog implements OnInit, OnDestroy {
       titulo: ['', Validators.required],
       institucion: ['', Validators.required],
       especialidad: [''],
+      institucionEspecialidad: [''],
       cedulaEspecialidad: [''],
       contrasena: ['', [Validators.required, Validators.minLength(8)]],
       terminosCondiciones: [false, Validators.requiredTrue],
@@ -228,19 +229,30 @@ export class RegistroDialog implements OnInit, OnDestroy {
 
   private aplicarValidadoresEspecialidad(profesion: string): void {
     const especialidad = this.datosPersonalesForm.get('especialidad');
+    const institucionEspecialidad = this.datosPersonalesForm.get('institucionEspecialidad');
     const cedulaEspecialidad = this.datosPersonalesForm.get('cedulaEspecialidad');
-    if (!especialidad || !cedulaEspecialidad) return;
+    if (!especialidad || !institucionEspecialidad || !cedulaEspecialidad) return;
 
     if (profesion === 'especialista') {
       especialidad.setValidators([Validators.required]);
+      institucionEspecialidad.setValidators([Validators.required]);
       cedulaEspecialidad.setValidators([Validators.required, cedulaValidator]);
+      especialidad.enable();
+      institucionEspecialidad.enable();
+      cedulaEspecialidad.enable();
     } else {
       especialidad.clearValidators();
+      institucionEspecialidad.clearValidators();
       cedulaEspecialidad.clearValidators();
       especialidad.setValue('');
+      institucionEspecialidad.setValue('');
       cedulaEspecialidad.setValue('');
+      especialidad.disable();
+      institucionEspecialidad.disable();
+      cedulaEspecialidad.disable();
     }
     especialidad.updateValueAndValidity();
+    institucionEspecialidad.updateValueAndValidity();
     cedulaEspecialidad.updateValueAndValidity();
   }
 
@@ -301,10 +313,6 @@ export class RegistroDialog implements OnInit, OnDestroy {
   }
 
   aceptarPrivacidad(): void {
-    if (this.acepta.invalid) {
-      this.acepta.markAsTouched();
-      return;
-    }
     this.registrarYEnviarCodigo();
   }
 
@@ -336,6 +344,7 @@ export class RegistroDialog implements OnInit, OnDestroy {
         titulo: v.titulo,
         institucion: v.institucion,
         especialidad_medica: this.esEspecialista ? v.especialidad : 'Medicina General',
+        institucion_especialidad: this.esEspecialista ? v.institucionEspecialidad : '',
         cedula_especialidad: this.esEspecialista
           ? soloDigitos(v.cedulaEspecialidad)
           : '',

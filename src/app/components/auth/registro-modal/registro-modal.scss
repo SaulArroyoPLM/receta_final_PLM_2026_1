@@ -13,7 +13,7 @@
 }
 
 .registro-dialog-container {
-  background-color: #f8f9fa;
+  background-color: transparent;
   /* cambia el color del background-content */
 }
 
@@ -33,7 +33,7 @@
   border-radius: 20px;
   background: #fff;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-
+  overflow: hidden;
 }
 
 .registro-dialog-container.paso-datos {
@@ -59,82 +59,28 @@
   box-shadow: none;
 }
 
+::ng-deep .cdk-overlay-pane.registro-dialog-container .mat-mdc-dialog-surface {
+  background: transparent;
+  box-shadow: none;
+}
+
 .registro-dialog-container.paso-datos .grid {
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(7, auto);
+  align-items: start;
   gap: 11px 40px;
 }
 
-.registro-dialog-container.paso-datos .grid>app-campo-auth:nth-child(1) {
-  order: 1;
+.columna {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  min-width: 0;
 }
 
-.registro-dialog-container.paso-datos .grid>app-campo-auth:nth-child(3) {
-  order: 2;
-}
-
-.registro-dialog-container.paso-datos .grid>app-campo-auth:nth-child(5) {
-  order: 3;
-}
-
-.registro-dialog-container.paso-datos .grid>app-campo-auth:nth-child(6) {
-  order: 4;
-}
-
-.registro-dialog-container.paso-datos .grid>app-campo-auth:nth-child(7) {
-  order: 5;
-}
-
-.registro-dialog-container.paso-datos .grid>app-campo-auth:nth-child(8) {
-  order: 6;
-}
-
-.registro-dialog-container.paso-datos .grid>app-campo-auth:nth-child(9) {
-  order: 7;
-}
-
-.registro-dialog-container.paso-datos .grid>app-campo-auth:nth-child(2) {
-  order: 8;
-}
-
-.registro-dialog-container.paso-datos .grid>app-campo-auth:nth-child(4) {
-  order: 9;
-}
-
-.registro-dialog-container.paso-datos .grid>app-campo-auth:nth-child(11) {
-  order: 10;
-}
-
-.registro-dialog-container.paso-datos .grid>app-campo-auth:nth-child(12) {
-  order: 11;
-}
-
-.registro-dialog-container.paso-datos .grid>app-campo-auth:nth-child(13) {
-  order: 12;
-}
-
-.registro-dialog-container.paso-datos .grid>app-campo-auth:nth-child(14) {
-  order: 13;
-}
-
-.registro-dialog-container.paso-datos .grid>app-campo-auth:nth-child(10) {
-  order: 14;
-}
-
-.registro-dialog-container.paso-datos .grid>.modal-footer {
-  order: 15;
-}
 
 @media (max-width: 699px) {
   .registro-dialog-container.paso-datos .grid {
     grid-template-columns: 1fr;
-    grid-template-rows: none;
-    grid-auto-flow: row;
-  }
-
-  .registro-dialog-container.paso-datos .grid>app-campo-auth,
-  .registro-dialog-container.paso-datos .grid>.modal-footer {
-    order: initial;
   }
 }
 
@@ -354,23 +300,33 @@
   transition: all 0.15s ease-in-out;
 }
 
-/* Prevenir layout shift en botones de navegación */
+/* Botones de navegación del Paso 3 (integrados en la tarjeta) */
 .stepper-navigation {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
-  padding: 14px 1.5rem;
+  gap: 12px;
   flex-shrink: 0;
-  gap: 1rem;
-  min-height: 62px;
-  border-top: 1px solid #e0e0e0;
+  margin: 24px -40px 0;
+  padding: 16px 40px 20px;
+  border-top: 1px solid #e6e9ee;
   background: #f8f9fa;
+
+  .btn-previous,
+  .btn-next {
+    flex: 0 0 auto;
+    width: auto;
+    min-width: 140px;
+    height: 44px;
+    font-size: 15px;
+    border-radius: 10px;
+  }
 }
 
 .registro-dialog-container .dialog-content {
   padding: 0;
   margin: 0 !important;
-  background: #f8f9fa;
+  background: transparent;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -1042,23 +998,17 @@ mat-progress-bar {
 
   /* Botones de navegación móvil */
   .stepper-navigation {
-    align-items: normal;
-    gap: 1rem;
-    min-height: 12px;
-    /* Altura fija para móvil */
     justify-content: center;
-    padding: 0;
-  }
+    gap: 12px;
+    min-height: 0;
+    margin: 20px -40px 0;
+    padding: 14px 40px 18px;
 
-  .stepper-navigation ::ng-deep .mat-mdc-raised-button[disabled].mat-mdc-button-disabled,
-  .stepper-navigation ::ng-deep .mat-mdc-raised-button.mat-mdc-button-disabled.mat-mdc-button-disabled {
-    width: 100%;
-  }
-
-  .stepper-navigation ::ng-deep .mat-mdc-raised-button:not(:disabled) {
-    width: 100%;
-    background-color: #1458D9;
-    color: white;
+    .btn-previous,
+    .btn-next {
+      width: auto;
+      min-width: 120px;
+    }
   }
 
   .instructions-content {
